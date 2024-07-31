@@ -15,7 +15,7 @@ component = "encryption-module"
 
 [component.sos-c1]
 source = "target/wasm32-wasi/release/sos_c1.wasm"
-allowed_outbound_hosts = ["http://localhost:3000"]
+allowed_outbound_hosts = ["http://localhost:3000","https://sos-c1-9aej0qyi.fermyon.app"]
 
 [component.sos-c1.build]
 command = "cargo build --target wasm32-wasi --release"
