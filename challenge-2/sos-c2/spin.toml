@@ -1,0 +1,21 @@
+spin_manifest_version = 2
+
+[application]
+name = "sos-c2"
+version = "0.1.0"
+authors = ["franxois <franxoois+github@gmail.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/..."
+component = "sos-c2"
+
+[component.sos-c2]
+source = "target/wasm32-wasi/release/sos_c2.wasm"
+allowed_outbound_hosts = []
+ai_models = ["llama2-chat"]
+key_value_stores = ["default"]
+
+[component.sos-c2.build]
+command = "cargo build --target wasm32-wasi --release"
+watch = ["src/**/*.rs", "Cargo.toml"]
