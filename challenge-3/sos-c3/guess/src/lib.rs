@@ -61,12 +61,22 @@ fn handle_guess(req: Request) -> anyhow::Result<impl IntoResponse> {
     }
 
     if &rec_params.guess == &game.solution {
+        let current_row = game.response.current_row as usize;
+        let mut current_grid = game.response.grid;
+
+        current_grid[current_row] = rec_params
+            .guess
+            .chars()
+            .collect::<Vec<char>>()
+            .try_into()
+            .unwrap();
+
         let response: NextResponse = NextResponse {
             message: "You have guessed the word".to_string(),
             game_id: rec_params.game_id,
             current_row: game.response.current_row + 1,
             solved: true,
-            grid: game.response.grid,
+            grid: current_grid,
             correct_letters: rec_params
                 .guess
                 .chars()
