@@ -1,0 +1,35 @@
+spin_manifest_version = 2
+
+[application]
+name = "sos-c3"
+version = "0.1.0"
+authors = ["franxois <franxoois+github@gmail.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/api/start"
+component = "start"
+
+[component.start]
+source = "start/target/wasm32-wasi/release/start.wasm"
+allowed_outbound_hosts = []
+key_value_stores = ["default"]
+
+[component.start.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "start"
+watch = ["src/**/*.rs", "Cargo.toml"]
+
+[[trigger.http]]
+route = "/api/guess"
+component = "guess"
+
+[component.guess]
+source = "guess/target/wasm32-wasi/release/guess.wasm"
+allowed_outbound_hosts = []
+key_value_stores = ["default"]
+
+[component.guess.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "guess"
+watch = ["src/**/*.rs", "Cargo.toml"]

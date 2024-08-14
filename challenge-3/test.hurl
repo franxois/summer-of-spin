@@ -52,10 +52,16 @@ POST http://localhost:3000/api/start
     "solved": false
 }
 HTTP 200
+[Captures]
+gameId: jsonpath "$.gameId"
+
+# invalid guess
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=aa
+HTTP 400
 
 # Test 2
 # Please note, that we will use a different set of values when validating your submission
-GET http://127.0.0.1:3000/api/guess?gameId=2c047c81-45ac-44cb-ac7b-ad8c73f55d8a&guess=along
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=along
 {
     "message": "Congratulations!",
     "gameId": "2c047c81-45ac-44cb-ac7b-ad8c73f55d8a",
@@ -115,3 +121,18 @@ GET http://127.0.0.1:3000/api/guess?gameId=2c047c81-45ac-44cb-ac7b-ad8c73f55d8a&
 }
 
 HTTP 200
+
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=along
+HTTP 200
+
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=along
+HTTP 200
+
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=along
+HTTP 200
+
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=along
+HTTP 200
+
+GET http://127.0.0.1:3000/api/guess?gameId={{gameId}}&guess=along
+HTTP 400
