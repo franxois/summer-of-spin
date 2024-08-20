@@ -1,0 +1,35 @@
+spin_manifest_version = 2
+
+[application]
+name = "sos-c4"
+version = "0.1.0"
+authors = ["franxois <franxoois+github@gmail.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/register"
+component = "register"
+
+[component.register]
+source = "target/wasm32-wasi/release/register.wasm"
+allowed_outbound_hosts = []
+key_value_stores = ["default"]
+
+[component.register.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "register"
+watch = ["src/**/*.rs", "Cargo.toml"]
+
+[[trigger.http]]
+route = "/record"
+component = "record"
+
+[component.record]
+source = "target/wasm32-wasi/release/record.wasm"
+allowed_outbound_hosts = []
+key_value_stores = ["default"]
+
+[component.record.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "record"
+watch = ["src/**/*.rs", "Cargo.toml"]

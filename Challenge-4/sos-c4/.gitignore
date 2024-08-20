@@ -1,0 +1,4 @@
+main.wasm
+.spin/
+
+target/
